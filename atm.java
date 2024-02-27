@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 class atm extends Frame implements ActionListener {
-    private TextField amountField;
+    private TextField amtField;
     private Button withdrawButton, depositButton, checkBalanceButton;
     private Label messageLabel;
     private BankAccount account;
@@ -14,9 +14,9 @@ class atm extends Frame implements ActionListener {
         setSize(300, 200);
         setLayout(new FlowLayout());
 
-        amountField = new TextField(10);
+        amtField = new TextField(10);
         add(new Label("Enter amount: "));
-        add(amountField);
+        add(amtField);
 
         withdrawButton = new Button("Withdraw");
         add(withdrawButton);
@@ -39,7 +39,7 @@ class atm extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == withdrawButton) {
             try {
-                double amount = Double.parseDouble(amountField.getText());
+                double amount = Double.parseDouble(amtField.getText());
                 if (amount > 0) {
                     account.withdraw(amount);
                     messageLabel.setText("Withdrawal successful.");
@@ -51,7 +51,7 @@ class atm extends Frame implements ActionListener {
             }
         } else if (e.getSource() == depositButton) {
             try {
-                double amount = Double.parseDouble(amountField.getText());
+                double amount = Double.parseDouble(amtField.getText());
                 if (amount > 0) {
                     account.deposit(amount);
                     messageLabel.setText("Deposit successful.");
