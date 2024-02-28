@@ -28,12 +28,10 @@ public class guess {
             } else {
                 System.out.println("Too high! Try again.");
             }
-
-            if (attempts == max) {
-                System.out.println("Sorry, you've reached the maximum number of attempts. The correct number was " + numGenerated + ".");
-                break;
-            }
             attempts++;
+        }
+        if (attempts == max) {
+            System.out.println("Sorry, you've reached the maximum number of attempts. The correct number was " + numGenerated + ".");
         }
 
         sc.close();
