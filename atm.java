@@ -3,7 +3,7 @@ import java.awt.event.*;
 
 class atm extends Frame implements ActionListener {
     private TextField amtField;
-    private Button withdrawButton, depositButton, checkBalanceButton;
+    private Button wbutton, dbutton, checkBalButton;
     private Label messageLabel;
     private BankAccount account;
 
@@ -11,24 +11,24 @@ class atm extends Frame implements ActionListener {
         this.account = account;
 
         setTitle("ATM Machine");
-        setSize(300, 200);
+        setSize(300, 300);
         setLayout(new FlowLayout());
 
-        amtField = new TextField(10);
+        amtField = new TextField(12);
         add(new Label("Enter amount: "));
         add(amtField);
 
-        withdrawButton = new Button("Withdraw");
-        add(withdrawButton);
-        withdrawButton.addActionListener(this);
+        wbutton = new Button("Withdraw");
+        add(wbutton);
+        wbutton.addActionListener(this);
 
-        depositButton = new Button("Deposit");
-        add(depositButton);
-        depositButton.addActionListener(this);
+        dbutton = new Button("Deposit");
+        add(dbutton);
+        dbutton.addActionListener(this);
 
-        checkBalanceButton = new Button("Check Balance");
-        add(checkBalanceButton);
-        checkBalanceButton.addActionListener(this);
+        checkBalButton = new Button("Check Balance");
+        add(checkBalButton);
+        checkBalButton.addActionListener(this);
 
         messageLabel = new Label("");
         add(messageLabel);
@@ -37,11 +37,11 @@ class atm extends Frame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == withdrawButton) {
+        if (e.getSource() == wbutton) {
             try {
-                double amount = Double.parseDouble(amtField.getText());
-                if (amount > 0) {
-                    account.withdraw(amount);
+                double amt = Double.parseDouble(amtField.getText());
+                if  (amt > 0) {
+                    account.withdraw (amt);
                     messageLabel.setText("Withdrawal successful.");
                 } else {
                     messageLabel.setText("Invalid amount.");
@@ -49,11 +49,11 @@ class atm extends Frame implements ActionListener {
             } catch (NumberFormatException ex) {
                 messageLabel.setText("Invalid input. Please enter a valid number.");
             }
-        } else if (e.getSource() == depositButton) {
+        } else if (e.getSource() == dbutton) {
             try {
-                double amount = Double.parseDouble(amtField.getText());
-                if (amount > 0) {
-                    account.deposit(amount);
+                double amt = Double.parseDouble(amtField.getText());
+                if  (amt > 0) {
+                    account.deposit (amt);
                     messageLabel.setText("Deposit successful.");
                 } else {
                     messageLabel.setText("Invalid amount.");
@@ -61,37 +61,37 @@ class atm extends Frame implements ActionListener {
             } catch (NumberFormatException ex) {
                 messageLabel.setText("Invalid input. Please enter a valid number.");
             }
-        } else if (e.getSource() == checkBalanceButton) {
-            messageLabel.setText("Current balance: $" + account.getBalance());
+        } else if (e.getSource() == checkBalButton) {
+            messageLabel.setText("Current bal: $" + account.getBal());
         }
     }
 
     public static void main(String[] args) {
-        BankAccount account = new BankAccount(100); // Initial balance of $1000
+        BankAccount account = new BankAccount(100); // Initial bal of $100
         new atm(account);
     }
 }
 
 class BankAccount {
-    private double balance;
+    private double bal;
 
-    public BankAccount(double initialBalance) {
-        this.balance = initialBalance;
+    public BankAccount(double initialBal) {
+        this.bal = initialBal;
     }
 
-    public double getBalance() {
-        return balance;
+    public double getBal() {
+        return bal;
     }
 
-    public void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
+    public void deposit (double amt) {
+        if  (amt > 0) {
+            bal =bal + amt;
         }
     }
 
-    public void withdraw(double amount) {
-        if (amount > 0 && amount <= balance) {
-            balance -= amount;
+    public void withdraw (double amt) {
+        if  (amt > 0 && amt <= bal) {
+            bal = bal - amt;
         }
     }
 }
